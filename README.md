@@ -4,7 +4,7 @@ This script is used to fix encoding errors in CSV files that contain non-ASCII c
 ## Installation
 1. Clone this repository to your local machine using 
 ```Bash
-git clone https://github.com/yourusername/csv-encoding-fixer.git
+git clone https://github.com/Akmot9/csv-encoding-fixer.git
 ```
 2. Install the required dependencies using pip install -r requirements.txt
 ## Usage

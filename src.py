@@ -1,14 +1,27 @@
-# for file in list of files
-# for row in rows of a file
-#A_Remplacer = ["Ã®", "Ã©", "â†’", "Ãœ", "Ã¹", "Ã¢", "Ã¨", "Ã ", "â€™", "â‚¬", "Â®", "Ã˜", "Â°", "Ã§", "Ã´", "Â«", "Â»", "Ã»", "Ãª", "â€¦", "/Ã¸", "Ã¸", "Ã€", "Ã‰", "Ãˆ", " Ã ", "Ã–"]
-#Remplacants = ["î" , "é" , Chr(26), "Ü", "û", "â", "è", "à", "'", "€", "®", "Ø", "°", "ç", "ô", Chr(34), Chr(34), "û", "ê", "..", "ø", "ø", "A", "E", "E", " à ", "Ö"]
-
 import csv
 
-with open('input.csv', 'r', encoding='utf-8') as infile, \
-     open('output.csv', 'w', encoding='utf-8', newline='') as outfile:
+# Define a function to fix encoding errors
+def fix_encoding(text):
+    # List of characters to replace and their replacements
+    to_replace = ['Ã®', 'Ã©', 'â†’', 'Ãœ', 'Ã¹', 'Ã¢', 'Ã¨', 'Ã ', 'â€™', 'â‚¬', 'Â®', 'Ã˜', 'Â°', 'Ã§', 'Ã´', 'Â«', 'Â»', 'Ã»', 'Ãª', 'â€¦', '/Ã¸', 'Ã¸', 'Ã€', 'Ã‰', 'Ãˈ', ' Ã ', 'Ã–']
+    replacements = ['î', 'é', '-->', 'Ü', 'û', 'â', 'è', 'à', "'", '€', '®', 'Ø', '°', 'ç', 'ô', '«', '»', 'û', 'ê', '..', 'ø', 'ø', 'A', 'E', 'E', ' à ', 'Ö']
+
+    # Replace each character with its corresponding replacement
+    for i in range(len(to_replace)):
+        text = text.replace(to_replace[i], replacements[i])
+    return text
+
+# Open the input and output files using context managers
+with open('_test.csv', 'r', encoding='cp1252') as infile, \
+     open('output.csv', 'w', encoding='cp1252', newline='') as outfile:
+    # Create CSV reader and writer objects
     reader = csv.reader(infile)
     writer = csv.writer(outfile)
+
+    # Iterate over each row in the input file
     for row in reader:
-        new_row = [cell.replace('Ã®', 'î') for cell in row]
+        # Replace encoding errors in each cell of the row
+        new_row = [fix_encoding(cell) for cell in row]
+        # Write the corrected row to the output file
         writer.writerow(new_row)
+

@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  fix-encoding:
+    build: .
+    volumes:
+      - ./output:/app/output
+    environment:
+      - INPUT_FILE=/app/input_ansi_exel.csv
+      - OUTPUT_FILE=/app/output/output.csv

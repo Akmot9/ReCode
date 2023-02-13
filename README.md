@@ -9,10 +9,13 @@ git clone https://github.com/Akmot9/csv-encoding-fixer.git
 2. Install the required dependencies using pip install -r requirements.txt
 ## Usage
 1. Place the CSV file you want to fix in the same directory as the script.
-2. Open a command prompt or terminal and navigate to the script directory.
-3. Run the script using the command :
+2. Open a command prompt or terminal and pull the docker image
+```bash
+docker pull akmot9/recode:latest
+```
+3. Run the script using the docker command :
 ```Bash
-python csv_encoding_fixer.py input_file.csv output_file.csv
+docker run -v $(pwd):/data akmot9/recode:latest /data/name_of_input.csv /data/name_of_output.csv
 ```
 
 Replace `input_file.csv` with the name of the CSV file you want to fix, and replace `output_file.csv` with the name you want to give to the fixed CSV file.
